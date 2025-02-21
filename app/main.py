@@ -19,16 +19,14 @@ def calculate_distance(
         for product_name, product_want_to_buy in person.product.items()
         if product_name in shop.products
     )
-    distance_cost = person.fuel_price * (person.car_fuel_consumption / 100) * 2
+    distance_cost = person.car_fuel_consumption / 100
+    distance = math.sqrt(
+        (shop.location[0] - person.location[0]) ** 2
+        + (shop.location[1] - person.location[1]) ** 2
+    )
     all_distance = round(
-        math.sqrt(
-            (shop.location[0] - person.location[0]) ** 2
-            + (shop.location[1] - person.location[1]) ** 2
-        ), 2
-           * 2
-           * distance_cost
-            + total_cost,
-        2
+        (distance * distance_cost * person.fuel_price * 2)
+        + total_cost, 2
     )
     return all_distance
 
@@ -52,7 +50,7 @@ def shop_trip() -> str:
                 f"{person.name} rides to {cheapest_shop.name}\n"
                 f"\nDate: {date_time()}\n"
                 f"Thanks, {person.name}, for your purchase!\n"
-                "You have bought: "
+                "You have bought:"
             )
             all_products = 0
             for key, value in person.product.items():
@@ -63,16 +61,15 @@ def shop_trip() -> str:
                     total_price = str(product_price * value)
                     print(
                         f"{value} {key}s for "
-                        f"{total_price.rstrip('0').rstrip('.')} dollars"
+                        f"{total_price.rstrip("0").rstrip(".")} dollars"
                     )
 
             print(f"Total cost is {all_products} dollars\n"
                   "See you again!")
             person.money -= cheapest_distance
-            person.money -= all_products
             print(
                 f"\n{person.name} rides home\n"
-                f"{person.name} now has {person.money}"
+                f"{person.name} now has {person.money} "
                 f"dollars\n"
             )
         else:
