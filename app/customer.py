@@ -8,7 +8,7 @@ from app.data_json import load_data
 class Person:
     name: str
     product: dict
-    location: List[int]
+    location: List[float]
     money: int
     car_brand: str
     car_fuel_consumption: float

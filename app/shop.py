@@ -6,7 +6,7 @@ from app.data_json import load_data
 @dataclass
 class Shop:
     name: str
-    location: List[str]
+    location: List[float]
     products: dict
 
     @classmethod
