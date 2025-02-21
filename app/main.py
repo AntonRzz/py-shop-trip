@@ -18,7 +18,7 @@ def calculate_distance(
         for product_name, product_want_to_buy in person.product.items()
         if product_name in shop.products
     )
-    distance_cost = person.fuel_price * (person.car_fuel_consumption / 100)
+    distance_cost = person.fuel_price * (person.car_fuel_consumption / 100) * 2
     all_distance = round(
         (
             (
