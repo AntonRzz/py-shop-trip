@@ -23,7 +23,7 @@ def calculate_distance(
         (
             (
                 (shop.location[0] - person.location[0]) ** 2
-                + (shop.location[1] - shop.location[1]) ** 2
+                + (shop.location[1] - person.location[1]) ** 2
             )
         )
         ** 0.5
@@ -64,9 +64,10 @@ def shop_trip() -> str:
                     all_products += count
                     total_price = str(product_price * value)
                     print(
-                        f"{value} {key}s for"
-                        f" {total_price.rstrip("0").rstrip(".")} dollars"
+                        f"{value} {key}s for "
+                        f"{total_price.rstrip("0").rstrip(".")} dollars"
                     )
+
             print(f"Total cost is {all_products} dollars\n"
                   "See you again!")
             person.money -= cheapest_distance
@@ -77,7 +78,7 @@ def shop_trip() -> str:
             )
         else:
             print(
-                f"{person.name} doesn't have enought money"
+                f"{person.name} doesn't have enough money"
                 f" to make a purchase in any shop"
             )
 
