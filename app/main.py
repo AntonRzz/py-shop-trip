@@ -1,4 +1,5 @@
 import datetime
+import math
 from app.shop import Shop
 from app.customer import Person
 from typing import Union
@@ -20,23 +21,20 @@ def calculate_distance(
     )
     distance_cost = person.fuel_price * (person.car_fuel_consumption / 100) * 2
     all_distance = round(
-        (
-            (
-                (shop.location[0] - person.location[0]) ** 2
-                + (shop.location[1] - person.location[1]) ** 2
-            )
-        )
-        ** 0.5
-        * 2
-        * distance_cost
-        + total_cost,
+        math.sqrt(
+            (shop.location[0] - person.location[0]) ** 2
+            + (shop.location[1] - person.location[1]) ** 2
+        ), 2
+           * 2
+           * distance_cost
+            + total_cost,
         2
     )
     return all_distance
 
 
 def shop_trip() -> str:
-    cheapest_distance = 0
+    cheapest_distance = float("inf")
     cheapest_shop = None
     persons = Person.people_load()
     shops = Shop.get_shop()
@@ -45,7 +43,7 @@ def shop_trip() -> str:
         for shop in shops:
             distance = calculate_distance(person, shop)
             print(f"{person.name}'s trip to the {shop.name} costs {distance}")
-            if distance < cheapest_distance or cheapest_shop is None:
+            if distance < cheapest_distance:
                 cheapest_distance = distance
                 cheapest_shop = shop
         if person.money >= cheapest_distance:
@@ -71,6 +69,7 @@ def shop_trip() -> str:
             print(f"Total cost is {all_products} dollars\n"
                   "See you again!")
             person.money -= cheapest_distance
+            person.money -= all_products
             print(
                 f"\n{person.name} rides home\n"
                 f"{person.name} now has {person.money}"

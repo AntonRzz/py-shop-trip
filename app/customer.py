@@ -16,9 +16,9 @@ class Person:
 
     @classmethod
     def people_load(cls) -> List[Person]:
-        data = load_data(filename="config.json")
+        data = load_data(filename="app/config.json")
         customers = data["customers"]
-        fuel_price = data["fuel_price"]
+        fuel_price = data["FUEL_PRICE"]
 
         persons = [
             cls(

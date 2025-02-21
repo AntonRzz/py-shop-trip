@@ -11,7 +11,7 @@ class Shop:
 
     @classmethod
     def get_shop(cls) -> list["Shop"]:
-        data = load_data(filename="config.json")
+        data = load_data(filename="app/config.json")
         shop = [
             cls(
                 name=data_shop["name"],
