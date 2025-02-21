@@ -65,7 +65,7 @@ def shop_trip() -> str:
                     total_price = str(product_price * value)
                     print(
                         f"{value} {key}s for "
-                        f"{total_price.rstrip("0").rstrip(".")} dollars"
+                        f"{total_price.rstrip('0').rstrip('.')} dollars"
                     )
 
             print(f"Total cost is {all_products} dollars\n"
